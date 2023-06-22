@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 })
 export class AppComponent {
   title = 'bank-form';
-  constructor(public db: AngularFireDatabase) {}
+  constructor(public db: AngularFireDatabase, public authService: AuthService) {}
 
 
 
@@ -22,5 +23,9 @@ export class AppComponent {
 
     );
 
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

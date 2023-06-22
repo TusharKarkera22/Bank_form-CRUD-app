@@ -4,10 +4,12 @@
     
   <h1>Bank Form</h1>
   <span class="example-spacer"></span>
-  
-  <button routerLink="/list" mat-raised-button color="accent">
+  <button mat-raised-button (click)="logout()" color="accent" class="m-4 ">Logout</button>
+  <button routerLink="/list"mat-raised-button color="accent" [disabled]="!(authService.isLoggedIn() | async)">
     View Enquiry
   </button>
+  
+ 
 </mat-toolbar>
 
 <div class="container mt-4">

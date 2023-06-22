@@ -47,14 +47,28 @@ export class EditUserComponent implements OnInit {
 
 ngOnInit() {
   const id = this.activeRoute.snapshot.paramMap.get('id');
-  if (id!= null){
+  if (id !== null) {
     this.userService.getUserById(id).valueChanges().subscribe(data => {
-
-      this.userForm.setValue(data as any);
-
+      if (data) {
+        this.userForm.patchValue({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          mobile: data.mobile,
+          branch: data.branch,
+          code: data.code,
+          gender: data.gender,
+          accountDate: data.accountDate,
+          address1: data.address1,
+          address2: data.address2,
+          martialStatus: data.martialStatus,
+          employmentStatus: data.employmentStatus
+        });
+      }
     });
   }
 }
+
 submitForm(){
 
   this.userService.updateUser(this.userForm.value);

@@ -31,7 +31,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { ToastrModule } from 'ngx-toastr';
-
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -43,7 +46,9 @@ import { ToastrModule } from 'ngx-toastr';
     AppComponent,
     CreateUserComponent,
     ListUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,8 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     ToastrModule.forRoot(),
+    AngularFireAuthModule,
+    FormsModule,
     
   ],
   providers: [],
