@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bank-form';
+  constructor(public db: AngularFireDatabase) {}
+
+
+
+  ngOnInit() {
+
+    this.db.list("test").push("test")
+
+    .then( result =>
+
+      console.log(result.key)
+
+    );
+
+  }
 }

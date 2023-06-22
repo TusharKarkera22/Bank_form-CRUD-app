@@ -1,0 +1,142 @@
+<div class="logo text-center">
+    <img width="100" src="assets/bank.png" alt="logo">
+  </div>
+  
+  <div class="form m-3 p-4">
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()" novalidate>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input formControlName="firstName" matInput placeholder="Firstname">
+            <mat-error *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched">
+              First Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input formControlName="lastName" matInput placeholder="Lastname">
+            <mat-error *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched">
+              Last Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Email">
+            <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+              Invalid Email
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input formControlName="mobile" matInput placeholder="Mobileno" pattern="[0-9]*">
+            <mat-error *ngIf="userForm.controls['mobile'].invalid && userForm.controls['mobile'].touched">
+              Invalid Mobile Number
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Address1</mat-label>
+            <input formControlName="address1" matInput placeholder="Building Name">
+            <mat-error *ngIf="userForm.controls['address1'].invalid && userForm.controls['address1'].touched">
+              Address1 is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Address2</mat-label>
+            <input formControlName="address2" matInput placeholder="Locality">
+            <mat-error *ngIf="userForm.controls['address2'].invalid && userForm.controls['address2'].touched">
+              Address2 is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label id="example-radio-group-label">Gender:</label>
+          <mat-radio-group formControlName="gender" aria-label="Select an option">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="userForm.controls['gender'].invalid && userForm.controls['gender'].touched">
+            Gender is required
+          </mat-error>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label id="example-radio-group-label">Marital Status:</label>
+          <mat-radio-group formControlName="martialStatus" aria-label="Select an option">
+            <mat-radio-button value="Single">Single</mat-radio-button>
+            <mat-radio-button value="Married">Married</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="userForm.controls['martialStatus'].invalid && userForm.controls['martialStatus'].touched">
+            Marital Status is required
+          </mat-error>
+        </div>
+        <div class="col-md-6 mt-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Branch</mat-label>
+            <mat-select formControlName="branch">
+              <mat-option *ngFor="let branch of branches" [value]="branch">
+                {{ branch }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="userForm.controls['branch'].invalid && userForm.controls['branch'].touched">
+              Branch is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mt-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Branch Code</mat-label>
+            <mat-select formControlName="code">
+              <mat-option *ngFor="let code of codes" [value]="code">
+                {{ code }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="userForm.controls['code'].invalid && userForm.controls['code'].touched">
+              Branch Code is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mt-5">
+          <label id="example-radio-group-label">Employment Status:</label>
+          <mat-radio-group formControlName="employmentStatus" aria-label="Select an option">
+            <mat-radio-button value="Employed">Employed</mat-radio-button>
+            <mat-radio-button value="Unemployed">Unemployed</mat-radio-button>
+            <mat-radio-button value="Business">Business</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="userForm.controls['employmentStatus'].invalid && userForm.controls['employmentStatus'].touched">
+            Employment Status is required
+          </mat-error>
+        </div>
+        <div class="col-md-6 mt-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Created Date</mat-label>
+            <input formControlName="accountDate" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="userForm.controls['accountDate'].invalid && userForm.controls['accountDate'].touched">
+              Invalid Date
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <button type="submit"  [disabled]="userForm.invalid" class="mt-4 mb-4 position-absolute top-100 start-50 translate-middle"
+        mat-raised-button color="accent">
+        Update
+      </button>
+      
+    </form>
+  </div>
+  
