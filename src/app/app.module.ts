@@ -35,6 +35,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';   
 
 
 
@@ -79,6 +80,9 @@ import { FormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
     AngularFireAuthModule,
     FormsModule,
+    AngularFirestoreModule,
+    
+   
     
   ],
   providers: [],

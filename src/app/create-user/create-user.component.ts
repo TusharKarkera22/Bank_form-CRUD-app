@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-create-user',
@@ -10,120 +11,95 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-  
   public branches: string[] = ["Thane", "Mulund", "Bhandup", "Airoli", "Vashi", "Nerul", "Belapur", "Panvel"];
   public codes: string[] = ["101", "102", "103"];
-  public userForm!: FormGroup;
-  
+
+  userForm!: FormGroup;
 
   constructor(
-    public toastr: ToastrService,
-    public formBuilder: FormBuilder,
     public userService: UserService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService,
   ) {
     this.userForm = this.createForm();
   }
 
-
-  ngOnInit(){
-    this.userService.getUsersList();
-    
-  }
-
-  createForm() {
+  createForm(): FormGroup {
     return this.formBuilder.group({
-    firstName: ['', [Validators.required, Validators.minLength(2)]],
-    lastName: [''],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ],
-    ],
-    mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    branch: ['', Validators.required],
-    code: ['', Validators.required],
-    gender: ['', Validators.required],
-    accountDate: ['', Validators.required],
-    address1: ['', Validators.required],
-    address2: [''],
-    martialStatus: ['', Validators.required],
-    employmentStatus: ['', Validators.required],
-
+      firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      lastName: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
+      mobile: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+      branch: new FormControl('', Validators.required),
+      code: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      accountDate: new FormControl('', Validators.required),
+      address1: new FormControl('', Validators.required),
+      address2: new FormControl(''),
+      martialStatus: new FormControl('', Validators.required),
+      employmentStatus: new FormControl('', Validators.required),
     });
   }
-  resetForm(){
 
-    this.userForm.reset();
+  ngOnInit() {}
 
+  submitForm() {
+    this.userService.insertUser(this.userForm.value)
+      .then(() => {
+        this.toastr.success(`${this.userForm.controls['firstName'].value} created successfully`);
+        this.router.navigate(['/list']);
+      })
+      .catch((error) => {
+        this.toastr.error('Error: ' + error.message, 'Failed to create user');
+      });
   }
 
-  submitForm(){
-
-    this.userService.insertUser(this.userForm.value);
-
-    this.toastr.success(
-
-      this.userForm.controls['firstName'].value + " added successfully"
-
-    );
-
-  }
-
-  get firstName(){
-
+  get firstName() {
     return this.userForm.get('firstName');
-
   }
 
-  get lastName(){
+  get lastName() {
     return this.userForm.get('lastName');
   }
 
-  get email(){
+  get email() {
     return this.userForm.get('email');
   }
 
-  get mobile(){
+  get mobile() {
     return this.userForm.get('mobile');
   }
 
-  get branch(){
+  get branch() {
     return this.userForm.get('branch');
   }
 
-  get code(){
+  get code() {
     return this.userForm.get('code');
   }
-  get gender(){
+
+  get gender() {
     return this.userForm.get('gender');
   }
 
-  get accountDate(){  
+  get accountDate() {
     return this.userForm.get('accountDate');
   }
 
-  get address1(){
+  get address1() {
     return this.userForm.get('address1');
   }
 
-  get address2(){
+  get address2() {
     return this.userForm.get('address2');
   }
 
-  get martialStatus(){
+  get martialStatus() {
     return this.userForm.get('martialStatus');
   }
 
-  get employmentStatus(){
+  get employmentStatus() {
     return this.userForm.get('employmentStatus');
-
   }
-
-
 }
-
-
-
-
