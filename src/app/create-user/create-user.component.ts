@@ -55,51 +55,5 @@ export class CreateUserComponent implements OnInit {
       });
   }
 
-  get firstName() {
-    return this.userForm.get('firstName');
-  }
-
-  get lastName() {
-    return this.userForm.get('lastName');
-  }
-
-  get email() {
-    return this.userForm.get('email');
-  }
-
-  get mobile() {
-    return this.userForm.get('mobile');
-  }
-
-  get branch() {
-    return this.userForm.get('branch');
-  }
-
-  get code() {
-    return this.userForm.get('code');
-  }
-
-  get gender() {
-    return this.userForm.get('gender');
-  }
-
-  get accountDate() {
-    return this.userForm.get('accountDate');
-  }
-
-  get address1() {
-    return this.userForm.get('address1');
-  }
-
-  get address2() {
-    return this.userForm.get('address2');
-  }
-
-  get martialStatus() {
-    return this.userForm.get('martialStatus');
-  }
-
-  get employmentStatus() {
-    return this.userForm.get('employmentStatus');
-  }
+  
 }
